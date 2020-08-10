@@ -46,7 +46,7 @@ const Block = ({ num }) => {
       }}
     >
       {num}
-      {/*num !== 0 ? num : ""*/}
+      {num !== 0 ? num : ""}
     </div>
   );
 };
