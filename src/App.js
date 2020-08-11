@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import {cloneDeep} from 'lodash';
 
 
 function App() {
@@ -9,6 +9,19 @@ function App() {
     [0, 0, 0, 0],
     [0, 0, 0, 0],
   ]);
+  //Initialize
+  const initialize = () => {
+    // console.log("CALLING INITIALIZE");
+
+    let newGrid = cloneDeep(data);
+    console.log(newGrid);
+
+    addNumber(newGrid);
+    console.table(newGrid);
+    addNumber(newGrid);
+    console.table(newGrid);
+    setData(newGrid);
+  };
 
   //AddNumber - Add an item
 
@@ -33,6 +46,15 @@ function App() {
 
 
   }
+  //Swipe- Right, Left, Up and Down
+  
+  // Check Gameover 
+  //Reset
+  useEffect(() => {
+    initialize();
+    // document.addEventListener("keydown", handleKeyDown);
+  }, []);
+
   return(
     <div
       style={{
@@ -69,7 +91,7 @@ const Block = ({ num }) => {
       }}
     >
       {num}
-      {num !== 0 ? num : ""}
+      {/*num !== 0 ? num : ""*/}
     </div>
   );
 };
@@ -89,4 +111,3 @@ const style = {
   },    
 } 
 export default App;
-
