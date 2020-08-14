@@ -101,6 +101,7 @@ function App() {
 } else {
  
 }*/
+    
 };
   // Swipe right
   const swipeRight = () => {
