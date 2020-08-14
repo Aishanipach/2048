@@ -1,17 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import {cloneDeep} from 'lodash';
-
+import { useEvent, getColors } from './util';
 
 function App() {
+
+  const UP_ARROW = 38;
+  const DOWN_ARROW = 40;
+  const LEFT_ARROW = 37;
+  const RIGHT_ARROW = 39;
   const[data, setData] = useState([
     [0, 0, 0, 0],
     [0, 0, 0, 0],
     [0, 0, 0, 0],
     [0, 0, 0, 0],
+
+
   ]);
+
+  const [gameOver, setGameOver] = useState(false);
   //Initialize
   const initialize = () => {
-    // console.log("CALLING INITIALIZE");
+  // console.log("CALLING INITIALIZE");
 
     let newGrid = cloneDeep(data);
     console.log(newGrid);
@@ -21,6 +30,7 @@ function App() {
     addNumber(newGrid);
     console.table(newGrid);
     setData(newGrid);
+
   };
 
   //AddNumber - Add an item
@@ -28,7 +38,7 @@ function App() {
   const addNumber = (newGrid) => {
     let added = false;
     let gridFull= false;
-    let attempts = 0;
+    let attempts = 0; 
     while(!added) {
       if(gridFull){
         break;
@@ -43,7 +53,6 @@ function App() {
         added =true;
       }
     }
-
 
   }
   //Swipe- Right, Left, Up and Down
