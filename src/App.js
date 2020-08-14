@@ -20,6 +20,7 @@ function App() {
 
   const [gameOver, setGameOver] = useState(false);
   //Initialize
+  
   const initialize = () => {
   // console.log("CALLING INITIALIZE");
 
