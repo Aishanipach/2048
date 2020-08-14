@@ -1,3 +1,5 @@
+## This is the 2048 game.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 Using lodash 
 
