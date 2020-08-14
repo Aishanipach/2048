@@ -345,3 +345,5 @@ const style = {
     color: "white",
   },    
 } 
+
+export default App;
