@@ -58,6 +58,7 @@ function App() {
 
   }
   //Swipe- Right, Left, Up and Down
+  
   //Swipe left  
   const swipeLeft= () =>{
     let oldGrid= data;
