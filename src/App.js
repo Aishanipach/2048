@@ -56,14 +56,240 @@ function App() {
 
   }
   //Swipe- Right, Left, Up and Down
-  
+  //Swipe left  
+  const swipeLeft= () =>{
+    let oldGrid= data;
+    let newArray = cloneDeep(data);
+
+    
+    for (let i=0;i<4; i++){
+      let b =newArray[i];
+      let slow=0;
+      let fast=1;
+      while (slow<4){
+        if(fast== 4){
+          fast= slow+1;
+          slow++;
+          continue;
+        }
+        if (b[slow]=== 0 && b[fast] === 0){
+          fast++;
+        } else if(b[slow] ===0 && b[fast]!==0) {
+          fast++;
+        } else if (b[slow] !== 0 && b[fast] !== 0) {
+          if (b[slow] === b[fast]) {
+            b[slow] = b[slow] + b[fast];
+            b[fast] = 0;
+            fast = slow + 1;
+            slow++;
+          } else {
+            slow++;
+            fast = slow + 1;
+          }
+      }
+    }
+  }
+  if (JSON.stringify(oldGrid) !== JSON.stringify(newArray)) {
+    addNumber(newArray);
+  }
+  setData(newArray);
+
+/*if (dummy) {
+  return newArray;
+} else {
+ 
+}*/
+};
+  // Swipe right
+  const swipeRight = () => {
+    let oldData = data;
+    let newArray = cloneDeep(data);
+
+    for (let i = 3; i >= 0; i--) {
+      let b = newArray[i];
+      let slow = b.length - 1;
+      let fast = slow - 1;
+      while (slow > 0) {
+        if (fast === -1) {
+          fast = slow - 1;
+          slow--;
+          continue;
+        }
+        if (b[slow] === 0 && b[fast] === 0) {
+          fast--;
+        } else if (b[slow] === 0 && b[fast] !== 0) {
+          b[slow] = b[fast];
+          b[fast] = 0;
+          fast--;
+        } else if (b[slow] !== 0 && b[fast] === 0) {
+          fast--;
+        } else if (b[slow] !== 0 && b[fast] !== 0) {
+          if (b[slow] === b[fast]) {
+            b[slow] = b[slow] + b[fast];
+            b[fast] = 0;
+            fast = slow - 1;
+            slow--;
+          } else {
+            slow--;
+            fast = slow - 1;
+          }
+        }
+      }
+    }
+    if (JSON.stringify(newArray) !== JSON.stringify(oldData)) {
+      addNumber(newArray);
+    }
+    setData(newArray);
+    /*if (dummy) {
+      return newArray;
+    } else {
+      
+    }*/
+  };
+  // Swipe up 
+  const swipeUp = () => {
+    let b = cloneDeep(data);
+    let oldData = JSON.parse(JSON.stringify(data));
+    for (let i = 0; i < 4; i++) {
+      let slow = 0;
+      let fast = 1;
+      while (slow < 4) {
+        if (fast === 4) {
+          fast = slow + 1;
+          slow++;
+          continue;
+        }
+        if (b[slow][i] === 0 && b[fast][i] === 0) {
+          fast++;
+        } else if (b[slow][i] === 0 && b[fast][i] !== 0) {
+          b[slow][i] = b[fast][i];
+          b[fast][i] = 0;
+          fast++;
+        } else if (b[slow][i] !== 0 && b[fast][i] === 0) {
+          fast++;
+        } else if (b[slow][i] !== 0 && b[fast][i] !== 0) {
+          if (b[slow][i] === b[fast][i]) {
+            b[slow][i] = b[slow][i] + b[fast][i];
+            b[fast][i] = 0;
+            fast = slow + 1;
+            slow++;
+          } else {
+            slow++;
+            fast = slow + 1;
+          }
+        }
+      }
+    }
+    if (JSON.stringify(oldData) !== JSON.stringify(b)) {
+      addNumber(b);
+    }
+    setData(b);
+    /*if (dummy) {
+      return b;
+    } else {
+      
+    }*/
+  };
+  //Swipe down
+  const swipeDown = () => {
+    console.log(data);
+    let b = cloneDeep(data);
+    let oldData = JSON.parse(JSON.stringify(data));
+    for (let i = 3; i >= 0; i--) {
+      let slow = b.length - 1;
+      let fast = slow - 1;
+      while (slow > 0) {
+        if (fast === -1) {
+          fast = slow - 1;
+          slow--;
+          continue;
+        }
+        if (b[slow][i] === 0 && b[fast][i] === 0) {
+          fast--;
+        } else if (b[slow][i] === 0 && b[fast][i] !== 0) {
+          b[slow][i] = b[fast][i];
+          b[fast][i] = 0;
+          fast--;
+        } else if (b[slow][i] !== 0 && b[fast][i] === 0) {
+          fast--;
+        } else if (b[slow][i] !== 0 && b[fast][i] !== 0) {
+          if (b[slow][i] === b[fast][i]) {
+            b[slow][i] = b[slow][i] + b[fast][i];
+            b[fast][i] = 0;
+            fast = slow - 1;
+            slow--;
+          } else {
+            slow--;
+            fast = slow - 1;
+          }
+        }
+      }
+    }
+    if (JSON.stringify(b) !== JSON.stringify(oldData)) {
+      addNumber(b);
+    }
+    setData(b);
+    /*if (dummy) {
+      return b;
+    } else {
+     
+    }*/
+  };
   // Check Gameover 
   //Reset
+  const resetGame = () => {
+    setGameOver(false);
+    const emptyGrid = [
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+      [0, 0, 0, 0],
+    ];
+
+    addNumber(emptyGrid);
+    addNumber(emptyGrid);
+    setData(emptyGrid);
+  };
+
+ 
+  const handleKeyDown = (event) => {
+    if (gameOver) {
+      return;
+    }
+    switch (event.keyCode) {
+      case UP_ARROW:
+        // alert("up");
+        // console.table(data);
+        swipeUp();
+        // console.table(data);
+        break;
+      case DOWN_ARROW:
+        // console.table(data);
+        swipeDown();
+        // console.table(data);
+        break;
+      case LEFT_ARROW:
+        // console.table(data);
+        swipeLeft();
+        // console.table(data);
+        break;
+      case RIGHT_ARROW:
+        // console.table(data);
+        swipeRight();
+        // console.table(data);
+        break;
+      default:
+        break;
+    }
+    
+  };
   useEffect(() => {
     initialize();
-    // document.addEventListener("keydown", handleKeyDown);
+   // document.addEventListener("keydown", handleKeyDown);
   }, []);
 
+  useEvent('keydown', handleKeyDown);
+  
   return(
     <div
       style={{
@@ -95,7 +321,7 @@ const Block = ({ num }) => {
     <div
       style={{
         ...blockStyle,
-        //background: getColors(num),
+        background: getColors(num),
         color: num === 2 || num === 4 ? "#645B52" : "#F7F4EF",
       }}
     >
@@ -104,7 +330,7 @@ const Block = ({ num }) => {
     </div>
   );
 };
-
+ 
 const style = {
   blockStyle: {
     height: 80,
@@ -119,4 +345,3 @@ const style = {
     color: "white",
   },    
 } 
-export default App;
