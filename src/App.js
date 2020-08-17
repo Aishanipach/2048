@@ -93,16 +93,15 @@ function App() {
   if (JSON.stringify(oldGrid) !== JSON.stringify(newArray)) {
     addNumber(newArray);
   }
-  setData(newArray);
-
-/*if (dummy) {
-  return newArray;
-} else {
- 
-}*/
+  if (dummy) {
+    return newArray;
+    
+  } else {
+    setData(newArray);
+  }
 };
   // Swipe right
-  const swipeRight = () => {
+  const swipeRight = (dummy) => {
     let oldData = data;
     let newArray = cloneDeep(data);
 
@@ -140,15 +139,16 @@ function App() {
     if (JSON.stringify(newArray) !== JSON.stringify(oldData)) {
       addNumber(newArray);
     }
-    setData(newArray);
-    /*if (dummy) {
+   
+    if (dummy) {
       return newArray;
-    } else {
       
-    }*/
+    } else {
+      setData(newArray);
+    }
   };
   // Swipe up 
-  const swipeUp = () => {
+  const swipeUp = (dummy) => {
     let b = cloneDeep(data);
     let oldData = JSON.parse(JSON.stringify(data));
     for (let i = 0; i < 4; i++) {
@@ -184,15 +184,16 @@ function App() {
     if (JSON.stringify(oldData) !== JSON.stringify(b)) {
       addNumber(b);
     }
-    setData(b);
-    /*if (dummy) {
+    
+    if (dummy) {
       return b;
-    } else {
       
-    }*/
+    } else {
+      setData(b);
+    }
   };
   //Swipe down
-  const swipeDown = () => {
+  const swipeDown = (dummy) => {
     console.log(data);
     let b = cloneDeep(data);
     let oldData = JSON.parse(JSON.stringify(data));
@@ -229,12 +230,13 @@ function App() {
     if (JSON.stringify(b) !== JSON.stringify(oldData)) {
       addNumber(b);
     }
-    setData(b);
-    /*if (dummy) {
+   
+    if (dummy) {
       return b;
+      
     } else {
-     
-    }*/
+      setData(b);
+    }
   };
   // Check Gameover 
   //Reset
